@@ -2,7 +2,7 @@
 ### Q1 ###
 1. 162.105.72.128  
 2. 62  
-3. 4  
+3. 1024  
 ### Q2 ###
 ![image](https://github.com/assassinmsq/ichw/blob/master/git%E7%85%A7%E7%89%87/git%E7%85%A7%E7%89%87/%E4%B8%89%E6%AD%A5%E6%8F%A1%E6%89%8B.png)  
 　　主机A向B发送连接请求，主机B对收到的主机A的报文段进行确认，主机A再次对主机B的确认进行确认。  
