@@ -1,5 +1,6 @@
 import turtle
 
+
 wn = turtle.Screen()
 wn.bgcolor("black")
 
@@ -14,7 +15,6 @@ Sun = turtle.Turtle()
 Sun.shape("circle")
 Sun.color("red")
 Sun.shapesize(1.5,1.5)
-
 
 b = turtle.Turtle()
 b.shape("circle")
