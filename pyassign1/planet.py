@@ -1,3 +1,10 @@
+"""Planet.py: simulation of solar system.
+
+__author__ = "Ma Siqi"
+__pkuid__  = "1800011760"
+__email__  = "1800011760@pku.edu.cn"
+"""
+
 import turtle
 
 
@@ -110,3 +117,4 @@ for i in range(120):
         h.fd(a + 12)
         j.lt(3)
         j.fd(a +16)
+       
