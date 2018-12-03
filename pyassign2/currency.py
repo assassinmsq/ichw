@@ -37,21 +37,21 @@ code = ["AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "U
 
 def test_typecf(a):
     """test the type of the currency_from input
-        """
+    """
 
     assert a in code, 'currency_from is a string for a valid currency code'
 
 
 def test_typect(b):
     """test the type of the currency_to input
-        """
+    """
 
     assert b in code, 'currency_to is a string for a valid currency code'
 
 
 def test_exchange(currency_from, currency_to, amount_from, result):
     """test the result of the amount_to
-        """
+    """
 
     assert exchange(currency_from, currency_to, amount_from) == result
 
