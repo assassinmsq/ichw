@@ -29,7 +29,7 @@ def exchange(currency_from, currency_to, amount_from):
 
         list = ori.split()
         result = float(list[0])
-        return(result)
+        return result
 
 
 code = ["AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "USD", "EUR"]
