@@ -1,4 +1,3 @@
-# coding: utf-8
 from turtle import Turtle
 
 HORIZONTAL = 0
@@ -154,7 +153,6 @@ def main():
         t = Turtle()
         draw_board(t)
         draw_solution(t, res[index])
-        #ttl.done()
         t.screen.exitonclick()
     else:
         print('No Solution')
