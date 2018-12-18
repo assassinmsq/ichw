@@ -1,10 +1,4 @@
-"""Currency.py: currency translation.
-
-__author__ = "Ma Siqi"
-__pkuid__  = "1800011760"
-__email__  = "1800011760@pku.edu.cn"
-"""
-
+# coding: utf-8
 from turtle import Turtle
 
 HORIZONTAL = 0
@@ -12,14 +6,14 @@ VERTICAL = 1
 
 def draw_line (ttl, x1, y1, x2, y2):
     '''
-	help function drawing line
-	Args:
-	    ttl: turtle
-		x1: x-coordinate of starting point
-		y1: y-coordinate of starting point
-		x2: x-coordinate of end point
+    help function drawing line
+    Args:
+        ttl: turtle
+        x1: x-coordinate of starting point
+        y1: y-coordinate of starting point
+        x2: x-coordinate of end point
         y2: y-coordinate of end point
-	'''
+    '''
     ttl.penup()
     ttl.goto (x1, y1)
     ttl.pendown()
@@ -28,11 +22,11 @@ def draw_line (ttl, x1, y1, x2, y2):
 
 def draw_board(ttl, width=50):
     '''
-	draw board
-	Args:
-	    ttl: turtle
-		width: width of oen tile
-	'''
+    draw board
+    Args:
+        ttl: turtle
+        width: width of oen tile
+    '''
     global W, H
     ttl.color('blue')
     w_bias = W // 2 * width
@@ -58,17 +52,18 @@ def draw_board(ttl, width=50):
             ttl.pendown()
             ttl.write(i + j * W)  
             
-def draw_rectangle(ttl, x1, y1, x2, y2, W, H, width=50):
+def draw_rectangle(ttl, x1, y1, x2, y2, width=50):
     '''
-	help function drawing rectangle
-	Args:
-	    ttl: turtle
-		x1: x-coordinate of one corner
-		y1: y-coordinate of same ecorner above
-		x2: x-coordinate of opposite corner
+    help function drawing rectangle
+    Args:
+        ttl: turtle
+        x1: x-coordinate of one corner
+        y1: y-coordinate of same ecorner above
+        x2: x-coordinate of opposite corner
         y2: y-coordinate of same corner above
-        width: width of one tile		
-	'''
+        width: width of one tile        
+    '''
+    global W, H
     ttl.color('black')
     ttl.pensize(3)
     w_bias = W // 2 * width
@@ -80,11 +75,11 @@ def draw_rectangle(ttl, x1, y1, x2, y2, W, H, width=50):
     
 def draw_solution(ttl, sol):
     '''
-	draw solution'
-	Args:
-	    ttl: turtle
-		sol: solution
-	'''
+    draw solution'
+    Args:
+        ttl: turtle
+        sol: solution
+    '''
     global w, h, W, H
     for x1, y1, direction in sol:
         if direction == HORIZONTAL:
@@ -93,8 +88,8 @@ def draw_solution(ttl, sol):
         else:
             x2 = x1 + h
             y2 = y1 - w
-        draw_rectangle(ttl, x1, y1, x2, y2, W, H)
-		
+        draw_rectangle(ttl, x1, y1, x2, y2)
+        
 def solve(heights, history, res):
     '''
     solution based on backtracking / recursion starting from the upperleft corner.
@@ -118,7 +113,7 @@ def solve(heights, history, res):
         new_history.append((max_ind, heights[max_ind], HORIZONTAL))
         solve(new_heights, new_history, res)
     #put the tile vertically
-    if max_ind + h <= len(heights) and all(height >= w for height in heights[max_ind:max_ind + h]):
+    if w != h and max_ind + h <= len(heights) and all(height >= w for height in heights[max_ind:max_ind + h]):
         new_heights = [height for height in heights]
         for j in range(h):
             new_heights[max_ind + j] -= w
@@ -138,9 +133,9 @@ def transform(x, y, direction):
     '''
     global W, H, w, h
     if direction == HORIZONTAL:
-        return tuple((j * W + i) for j in range(H - y, H - y + h) for i in range(x, x + w))
+        return tuple((j * W + i) for j in range(y - h, y) for i in range(x, x + w))
     else:
-        return tuple((j * W + i) for j in range(H - y, H - y + w) for i in range(x, x + h))               
+        return tuple((j * W + i) for j in range(y - w, y) for i in range(x, x + h))               
 
 def main():
     global W, H, w, h
@@ -154,12 +149,15 @@ def main():
     solve(init_heights, [], res)
     printable_res = [[transform(*step) for step in solution] for solution in res]
     print(printable_res)
-    index = int(input('Input Number of 0 ~ {}'.format(len(res) - 1)))
-    t = Turtle()
-    draw_board(t)
-    draw_solution(t, res[index])
-    #ttl.done()
-    t.screen.exitonclick()
+    if len(res) > 0:
+        index = int(input('Input Number of 0 ~ {}'.format(len(res) - 1)))
+        t = Turtle()
+        draw_board(t)
+        draw_solution(t, res[index])
+        #ttl.done()
+        t.screen.exitonclick()
+    else:
+        print('No Solution')
 
 
 if __name__ == '__main__':
