@@ -1,3 +1,10 @@
+"""Tile.py: to tile.
+
+__author__ = "Ma Siqi"
+__pkuid__  = "1800011760"
+__email__  = "1800011760@pku.edu.cn"
+"""
+
 from turtle import Turtle
 
 HORIZONTAL = 0
@@ -6,7 +13,7 @@ VERTICAL = 1
 
 def draw_line(ttl, x1, y1, x2, y2):
     '''
-    help function drawing line
+    draw lines
     Args:
         ttl: turtle
         x1: x-coordinate of starting point
@@ -56,7 +63,7 @@ def draw_board(ttl, width=50):
 
 def draw_rectangle(ttl, x1, y1, x2, y2, width=50):
     '''
-    help function drawing rectangle
+    draw rectangle
     Args:
         ttl: turtle
         x1: x-coordinate of one corner
@@ -75,9 +82,10 @@ def draw_rectangle(ttl, x1, y1, x2, y2, width=50):
     draw_line(ttl, x2 * width - w_bias, y2 * width - h_bias, x2 * width - w_bias, y1 * width - h_bias)
     draw_line(ttl, x2 * width - w_bias, y1 * width - h_bias, x1 * width - w_bias, y1 * width - h_bias)
     
+
 def draw_solution(ttl, sol):
     '''
-    draw solution'
+    draw solutions
     Args:
         ttl: turtle
         sol: solution
@@ -92,9 +100,10 @@ def draw_solution(ttl, sol):
             y2 = y1 - w
         draw_rectangle(ttl, x1, y1, x2, y2)
         
+
 def solve(heights, history, res):
     '''
-    solution based on backtracking / recursion starting from the upper left corner.
+    solution starting from the upper left corner.
     Args:
         heights: heights of the blank tiles.
         history: tiles put so far.
@@ -106,7 +115,7 @@ def solve(heights, history, res):
     for i, x in enumerate(heights):
         if x > max_height:
             max_height, max_ind = x, i
-    #put the tile horizontally 
+    # put the tile horizontally
     if max_ind + w <= len(heights) and all(height >= h for height in heights[max_ind:max_ind + w]):
         new_heights = [height for height in heights]
         for j in range(w):
@@ -114,7 +123,7 @@ def solve(heights, history, res):
         new_history = [his for his in history]
         new_history.append((max_ind, heights[max_ind], HORIZONTAL))
         solve(new_heights, new_history, res)
-    #put the tile vertically
+    # put the tile vertically
     if w != h and max_ind + h <= len(heights) and all(height >= w for height in heights[max_ind:max_ind + h]):
         new_heights = [height for height in heights]
         for j in range(h):
@@ -123,12 +132,13 @@ def solve(heights, history, res):
         new_history.append((max_ind, heights[max_ind], VERTICAL))
         solve(new_heights, new_history, res)
 
+
 def transform(x, y, direction):
     '''
-    help function to transform the tile representation to the standard format.
+    transform the tile representation to the standard format.
     Args:
-        x: x-coordinate of the upperleft corner
-        y: y-coordinate of the upperleft corner
+        x: x-coordinate of the upper left corner
+        y: y-coordinate of the upper left corner
         direction: HORIZONTAL or VERTICAL
     Returns:
         the transformed representation.
@@ -137,7 +147,7 @@ def transform(x, y, direction):
     if direction == HORIZONTAL:
         return tuple((j * W + i) for j in range(y - h, y) for i in range(x, x + w))
     else:
-        return tuple((j * W + i) for j in range(y - w, y) for i in range(x, x + h))               
+        return tuple((j * W + i) for j in range(y - w, y) for i in range(x, x + h))
 
 
 def main():
@@ -164,4 +174,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
