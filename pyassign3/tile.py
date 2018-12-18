@@ -3,7 +3,8 @@ from turtle import Turtle
 HORIZONTAL = 0
 VERTICAL = 1
 
-def draw_line (ttl, x1, y1, x2, y2):
+
+def draw_line(ttl, x1, y1, x2, y2):
     '''
     help function drawing line
     Args:
@@ -14,10 +15,11 @@ def draw_line (ttl, x1, y1, x2, y2):
         y2: y-coordinate of end point
     '''
     ttl.penup()
-    ttl.goto (x1, y1)
+    ttl.goto(x1, y1)
     ttl.pendown()
-    ttl.goto (x2, y2)
+    ttl.goto(x2, y2)
     ttl.penup()
+
 
 def draw_board(ttl, width=50):
     '''
@@ -51,6 +53,7 @@ def draw_board(ttl, width=50):
             ttl.pendown()
             ttl.write(i + j * W)  
             
+
 def draw_rectangle(ttl, x1, y1, x2, y2, width=50):
     '''
     help function drawing rectangle
@@ -91,7 +94,7 @@ def draw_solution(ttl, sol):
         
 def solve(heights, history, res):
     '''
-    solution based on backtracking / recursion starting from the upperleft corner.
+    solution based on backtracking / recursion starting from the upper left corner.
     Args:
         heights: heights of the blank tiles.
         history: tiles put so far.
@@ -136,10 +139,11 @@ def transform(x, y, direction):
     else:
         return tuple((j * W + i) for j in range(y - w, y) for i in range(x, x + h))               
 
+
 def main():
     global W, H, w, h
-    W = input('Rectangle width:')
-    H = input('Rectangle height:')
+    W = input('Wall width:')
+    H = input('Wall height:')
     w = input('Tile width:')
     h = input('Tile height:')
     W, H, w, h = map(int, (W, H, w, h))
