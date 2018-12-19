@@ -67,7 +67,7 @@ def draw_rectangle(ttl, x1, y1, x2, y2, width=50):
     Args:
         ttl: turtle
         x1: x-coordinate of one corner
-        y1: y-coordinate of same ecorner above
+        y1: y-coordinate of same corner above
         x2: x-coordinate of opposite corner
         y2: y-coordinate of same corner above
         width: width of one tile        
@@ -161,7 +161,7 @@ def main():
     res = []
     solve(init_heights, [], res)
     printable_res = [[transform(*step) for step in solution] for solution in res]
-    print(printable_res)
+    print(printable_res, len(printable_res))
     if len(res) > 0:
         index = int(input('Input Number of 0 ~ {}'.format(len(res) - 1)))
         t = Turtle()
