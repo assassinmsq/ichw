@@ -28,8 +28,12 @@ def wcount(lines, topn=10):
     # 统计每个单词的频率
     res = sorted(n.items(),key = lambda ky:ky[1], reverse = True)
     # 按频率降序排列
-    for i in range(topn):
-        print(res[i][0],res[i][1])
+    if int(topn) > len(res):
+        for i in res:
+            print(i[0],i[1])
+    else:
+        for i in range(topn):
+            print(res[i][0],res[i][1])
     
 if __name__ == '__main__':
     if  len(sys.argv) == 1:
