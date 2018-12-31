@@ -5,10 +5,13 @@ __pkuid__  = "1800011760"
 __email__  = "1800011760@pku.edu.cn"
 """
 
+
 import sys
 from urllib.request import urlopen
+from urllib import error
 import collections
 import re
+
 
 def wcount(lines, topn=10):
     """count words from lines of text string, then sort by their counts 
@@ -35,9 +38,20 @@ def wcount(lines, topn=10):
         for i in range(topn):
             print(res[i][0],res[i][1])
     
+
 if __name__ == '__main__':
     if  len(sys.argv) == 1:
         print('Usage: {} url [topn]'.format(sys.argv[0]))
         print('  url: URL of the txt file to analyze ')
         print('  topn: how many (words count) to output. If not given, will output top 10 words')
         sys.exit(1)
+    elif len(sys.argv) == 2:
+        try:
+            wcount(sys.argv[1])
+        except error.URLError as e:
+            print(e.reason)
+    elif len(sys.argv) == 3:
+        try:
+            wcount(sys.argv[1],int(sys.argv[2]))
+        except error.URLError as e:
+            print(e.reason)
